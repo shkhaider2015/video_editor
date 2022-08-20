@@ -28,7 +28,7 @@ const CheckboxWrapper = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    // justify-content: space-between;
 
     .box {
         width: 30px;
@@ -43,6 +43,7 @@ const CheckboxWrapper = styled.div`
     };
 
     .label-con {
+        padding-left: 30px;
     }
 
     .label {

@@ -15,7 +15,7 @@ const ProgressBarWrapper = styled.div`
     height: 25px;
     background-color: ${Colors.secondary};
     border-radius: 20px;
-    width: 100%;
+    width: 60%;
 
     .fill {
         height: 25px;

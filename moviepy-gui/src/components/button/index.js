@@ -10,8 +10,13 @@ const Button = (props) => {
         disable=false
     } = props;
 
-    return <ButtonWrapper onClick={onClick} width={width} disable={disable} >
+    return <ButtonWrapper
+         onClick={onClick} 
+         width={width} 
+         disable={disable} 
+         >
         <span className={`btn`} >{title}</span>
+    
     </ButtonWrapper>
 }
 
