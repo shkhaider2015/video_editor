@@ -1,5 +1,5 @@
 
-from moviepy.editor import VideoFileClip, concatenate_videoclips
+from moviepy.editor import VideoFileClip, concatenate_videoclips, vfx
 import re
 import utils
 
@@ -10,7 +10,8 @@ def fun(inputs, fileName):
     for item in inputs:
       clip = VideoFileClip(fileName).subclip(item['start_time'], item['end_time'])
       clips.append(clip)
-    final_clip = concatenate_videoclips(clips)
+    concatinate = concatenate_videoclips(clips)
+    final_clip = concatinate.fx( vfx.speedx, 0.5)
     final_clip.write_videofile("new.mp4")
 
 
