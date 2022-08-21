@@ -1,6 +1,7 @@
 import React from "react";
+import ReactPlayer from "react-player";
 import styled from "styled-components";
-import { Button, Checkbox, FormHandler, ProgressBar, VideoPlayer } from "../../components";
+import { Button, Checkbox, CustomVideoPlayer, FormHandler, ProgressBar, VideoPlayer } from "../../components";
 import { CutterSchema } from "../../schema";
 
 const Home = () => {
@@ -9,12 +10,14 @@ const Home = () => {
         cutterForm: {
             startTime: '',
             endTime: ''
-        }
+        },
+        file: null
     })
     const submitRef = React.useRef();
+    const fileRef = React.useRef();
 
     function _cutterClick(value) {
-        setState(pS => ({ ...pS, isCutter: value }))
+        setState(pS => ({ ...pS, cutterForm: value }))
     }
 
     function _onSubmit(values) {
@@ -22,27 +25,48 @@ const Home = () => {
     }
 
     function _onClickSubmit() {
-        submitRef.current?.click()
+       submitRef.current?.click();
+      
+    }
+
+    function _uploadVideo(e) {
+       let file = e.target.files[0]
+       console.log("My File : ", file);
+       setState(pS => ({...pS, file: file }))
     }
 
     return <HomeWrapper>
         <div className="row-1" >
             <div className="col-1" >
-                <Button title="Upload Video" width={'50%'} />
+                <Button title="Upload Video" width={'50%'} onClick={()=> fileRef.current?.click()} />
+                <input ref={fileRef} type="file" id="file" accept=".mp4, .mpeg|video/*" style={{display: "none"}} onChange={_uploadVideo} />
                 <div className="checkbox-con" >
                     <Checkbox label="Use Cutter" initialValue={state.isCutter} onClick={_cutterClick} />
                     <Checkbox label="Use Cutter" />
                     <Checkbox label="Use Cutter" />
                 </div>
-                <div>
-                    <FormHandler btnRef={submitRef} initialValues={state.cutterForm} validationSchema={CutterSchema} onSubmit={_onSubmit} />
+                <div style={{ padding: 8 }} >
+                    <FormHandler
+                         btnRef={submitRef} 
+                         initialValues={state.cutterForm} 
+                         validationSchema={CutterSchema} 
+                         onSubmit={_onSubmit} 
+                    />
                 </div>
                 <div style={{ marginTop: '10%' }} >
                     <Button title="Start" width={'25%'} onClick={_onClickSubmit} />
                 </div>
             </div>
             <div className="col-2" >
-                <VideoPlayer />
+                {/* <VideoPlayer /> */}
+                {
+                    state.file
+                    ? <CustomVideoPlayer file={URL.createObjectURL(state.file)} />
+                    : <VideoPlayer />
+                }
+                
+                {/* <VideoEditor /> */}
+                <span style={{ color: '#fff' }} > { state.file?.name?.split(" ")?.pop() } </span>
             </div>
         </div>
 
@@ -83,8 +107,10 @@ const HomeWrapper = styled.div`
     };
     .row-1 .col-2 {
         display: flex;
+        flex-direction: column;
         justify-content: center;
-        border: 1px solid red;
+        text-align: center;
+        border: 1px solid white;
         width: 50%;
     };
 `;

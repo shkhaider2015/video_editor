@@ -12,7 +12,9 @@ const VideoPlayer = (props) => {
 }
 
 const VideoPlayerWrapper = styled.div`
-
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
 `;
 
 export default VideoPlayer;

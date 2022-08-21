@@ -3,8 +3,7 @@ import Checkbox from "./checkbox";
 import FormHandler from "./formHandler";
 import ProgressBar from "./progressbar";
 import VideoPlayer from "./videoPlayer";
-
-
+import CustomVideoPlayer from "./customVideoPlayer";
 
 
 export {
@@ -12,5 +11,6 @@ export {
     Checkbox,
     ProgressBar,
     VideoPlayer,
-    FormHandler
+    FormHandler,
+    CustomVideoPlayer
 }
